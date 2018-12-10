@@ -1,0 +1,616 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Register | User </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+		============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <!-- Google Fonts
+		============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700" rel="stylesheet">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/owl.theme.css">
+    <link rel="stylesheet" href="css/owl.transitions.css">
+    <!-- datapicker CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/datapicker/datepicker3.css">
+     <!-- calendar CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="css/calendar/fullcalendar.print.min.css">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- morrisjs CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/morrisjs/morris.css">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="css/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="css/calendar/fullcalendar.print.min.css">
+    <!-- forms CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/form/all-type-forms.css">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="style.css">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/datapicker/datepicker3.css">
+
+    <link rel='stylesheet'  href="style.css " type='text/css' />
+    
+    <!-- modernizr JS
+		============================================ -->
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <style>
+      *{
+        box-sizing: border-box;
+      }
+    .hpanel{
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .note{
+      color: rgb(250, 97, 9); font-size: 14px;
+      text-align: center;
+    }
+    h3{
+      margin-top: 10px;
+      color: #D4AF37;
+    }
+    input[type="text"], input[type="date"],
+    input[type="email"],input[type="number"],input[type="password"] {
+      padding: 10px;
+      padding-left: 40px;
+      border: none; outline: none; background: transparent;
+      border-bottom: 2px solid teal;
+    }
+    input[type="text"]:focus{
+      border: none; outline: none;
+      border: 2px solid rgb(6, 109, 109) ;
+    }
+    label{
+      color: rgba(240, 232, 232, 0.6); margin-top: 15px;
+    }
+    body, .container-fluid{
+      background: transparent url('./img/background/bg9.jpg') repeat-y fixed center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    
+      }
+    .input-group > i{
+      position: absolute; bottom: 1px;      
+      color: #D4AF37; 
+      /* border-width:1px; */
+      /* border-style: solid; border-color: white; */
+      padding: 10px;
+    }
+    h2{
+  background: -webkit-linear-gradient(white, rgb(42, 207, 207));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+    }
+    p{
+      color:white;
+      position: relative;
+      bottom: 0;
+    }
+    img{
+      height: 30px; width: 30px;
+      display: none;
+   }
+    </style>
+</head>
+
+<body>
+  <script>
+    
+  function disableall(){
+
+  }
+  function enableall(){
+
+  }
+  function getuserinfo(){
+    var refid = document.getElementById("rid").value;   
+    $('#loadingimg').css('display', 'block');
+    $.ajax({
+                url : 'checkusesrvalidity.php', 
+                type : 'POST', 
+                data : {reffid : refid , x : 1},
+                success : function(result){   
+                   $('#refername').html(result);
+                }
+            });
+      $('#loadingimg').css('display', 'none');
+  }
+  function checkepin(){
+    var refid = document.getElementById("rid").value;  
+    var epin = document.getElementById("epin").value;
+    $('#loadingimg').css('display', 'block');
+    $.ajax({
+                url : 'checkusesrvalidity.php', 
+                type : 'POST', 
+                data : {reffid : refid , x : 2, epinn : epin},
+                success : function(result){ 
+                  if(result == "0"){
+                    $('#epinmismatch').html("Refferal ID and epin combination does not matched");
+                  }else if(result == "1"){
+                    $('#epinmismatch').html("Good Job");
+                    // enableall();
+                  }else if(result=="2"){
+                    $('#epinmismatch').html("Something went wrong. Please check your details..");
+                  }
+                  
+                }
+            });
+     $('#loadingimg').css('display', 'none');
+  }
+  </script>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <div class="color-line"></div>
+ 
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+            <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="text-center custom-login">
+                  <br/><br/>
+                    <h2>Success India Marketting Registration</h2> 
+                  </div>
+                  <br/><br/>
+                <div class="hpanel" style="border:5px double black; box-shadow:0 0 20px white;">
+                    <div class="panel-body" style="background-color: rgba(0, 0, 0, 0.4); color: white;">
+                        <form action="uregis.php" id="loginForm" method="POST" onsubmit="return validation()"  autocomplete="off">
+                            <div class="row">
+                                <div class="form-group col-lg-12">
+                                    <span class="note">Please fill Refferal Id and Epin details to activate below options</span>
+                                </div>
+                                <div class="clearfix"></div>
+                                
+                                <h3 class="text-center">Joining Details:</h3>
+                                <div class="col-lg-4">                                   
+                                    <div class="input-group"> <i class="fa fa-user"></i>
+                                        <input type="text" onfocusout="getuserinfo()" placeholder="Refferal ID" name="rid" id="rid" class="form-control"  required>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">                              
+                                    <div class="input-group">
+                                        <i class="fa fa-sign-in"></i>                                        
+                                        <input type="number" placeholder="E-Pin" name="epin" id="epin" class="form-control" onfocusout="checkepin()"  required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">                              
+                                  <div class="input-group">                                      
+                                    <label  class="text-info" id="refername"></label>
+                                  </div>
+                              </div>
+                              <div class="col-lg-12">                              
+                                  <div class="input-group">    
+                                      <img src="loading.gif" id="loadingimg"/>
+                                  </div>
+                              </div>
+                              <div class="col-lg-12">                              
+                                  <div class="input-group">                                      
+                                      <span class="note" id="epinmismatch"></span>
+                                  </div>
+                              </div>
+                                <div class="clearfix"></div><br/>
+                                <h3 class="text-center">Personal Info</h2>
+                                  
+                                  <div class="col-lg-4">
+                                      <label>First Name</label>
+                                      <div class="input-group">
+                                          <i class="fa fa-user"></i>
+                                          <input type="text" placeholder="First Name" name="fname" id="fname" class="form-control" required readonly>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <label>Middle Name</label>
+                                      <div class="input-group">
+                                          <i class="fa fa-user"></i>
+                                          <input type="text" placeholder="Middle Name" name="mname" id="mname" class="form-control" required readonly>
+                                      </div>
+                                  </div>
+                                  
+                                  <div class="col-lg-4">
+                                      <label>Last Name</label>
+                                      <div class="input-group">
+                                          <i class="fa fa-user"></i>
+                                          <input type="text" placeholder="Last Name" name="lname" id="lname" class="form-control"  required readonly>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <label>Mobile No</label>
+                                      <div class="input-group">
+                                          <i class="fa fa-phone"></i>
+                                          <input type="number" placeholder="Mobile No" name="mbno" id="mbno" class="form-control" required readonly>
+                                      </div>
+                                  </div>
+
+                                <div class="col-lg-4">
+                                    <label>Email ID</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-envelope"></i>
+                                        <input type="email" placeholder="Email ID" name="Emailid" id="Emailid" class="form-control" required readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Enter Unique Userid</label>
+                                    <div class="input-group">
+                                      <i class="fa fa-credit-card-alt"></i>
+                                        <input type="text" placeholder="Enter Unique Userid" name="Uid" id="Uid" class="form-control" required readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Password</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-key"></i>
+                                        <input type="password" placeholder="Password" name="pass" id="pass" class="form-control" required readonly>                     
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4">
+                                    <label>Confirm Password</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-key"></i>
+                                        <input type="password" placeholder="Confirm Password" name="cpass" id="cpass" onfocusout="checkpass()" class="form-control"  required readonly>
+                                        <div class="alert alert-danger" id="alertpass">Password does not match</div>
+                                    </div>
+                                </div>   
+                                <div class="col-lg-4">
+                                    <label>Date Of Birth</label>
+                                    <div class="input-group date">
+                                        <i class="fa fa-calendar"></i>
+                                        <input type="date" placeholder="Date Of Birth" name="dbirth"  id="dbirth" class="form-control"  required readonly>
+                                    </div>
+                                </div>
+
+                                <!----div class="clearfix"></div>
+                                <h3 class="text-center">Address Details:</h3>
+                                <div class="col-lg-4">
+                                    <label>Country</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-flag"></i>
+                                        <input type="text" placeholder="India" name="cindia" class="form-control">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4">
+                                    <label>State</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-key"></i>
+                                        <input type="text" placeholder="State" name="state" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label>City</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-user"></i>
+                                        <input type="text" placeholder="City" name="city" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Area</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-area-chart"></i>
+                                        <input type="text" placeholder="Area" name="area" class="form-control">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4">
+                                    <label>Landmark</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-key"></i>
+                                        <input type="text" placeholder="Landmark" name="lmark" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label>Pincode</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-user"></i>
+                                        <input type="text" placeholder="Pincode" name="pcode" class="form-control">
+                                    </div>
+                                </div>
+                               
+                                <div class="clearfix"></div>
+                                <h3 class="text-center">Nomenee Details:</h3>
+                                <div class="col-lg-6">
+                                    <label>Nomenee Name</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-key"></i>
+                                        <input type="text" placeholder="Nomenee Name" name="noname" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label>Relationship</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-user"></i>
+                                        <input type="text" placeholder="Relationship" name="relationship" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <h3 class="text-center">Bank Details:
+                                  </h3>
+                                <div class="col-lg-6">
+                                    <label>Bank Name</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-university"></i>
+                                        <input type="text" placeholder="Bank Name" name="bankname" class="form-control">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6">
+                                    <label>Branch Name</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-university"></i>
+                                        <input type="text" placeholder="Branch Name" name="branchname" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label>IFSC code</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-credit-card-alt"></i>
+                                        <input type="text" placeholder="IFSC code" name="ifsc" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Account No</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-credit-card-alt"></i>
+                                        <input type="text" placeholder="Account No" name="accno" class="form-control">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6">
+                                    <label>Adhar No</label>
+                                    <div class="input-group">
+                                       <i class="fa fa-address-card"></i>
+                                        <input type="text" placeholder="Adhar No" name="adrno" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label>PAN No</label>
+                                    <div class="input-group">
+                                        <i class="fa fa-columns"></i>
+                                        <input type="text" placeholder="PAN No" name="panno" class="form-control">
+                                    </div>
+                                </div-->
+                                <div class="checkbox col-lg-12">
+                                    <input type="checkbox" class="i-checks" checked> Sigh up for our newsletter
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-success loginbtn" id="btnregister" type="submit"  name="Register">Register</button>
+                                <button class="btn btn-default" type="reset" id="btncancel">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p>Copyright &copy; 2018 <a href="https://www.appzminetech.com/">Appzmine Tech Pvt Ltd</a> All rights reserved.</p>
+             </div>
+        </div>
+    </div>
+
+    <script>
+        var ps, cps;
+        ps = document.getElementById("pass");
+        cps = document.getElementById("cpass");
+        document.getElementById("alertpass").style.display = "none";
+        function checkpass(){
+          var x,y;
+          x = ps.value; y = cps.value;         
+          if(x != y){
+            cps.style.color = "black";
+            document.getElementById("alertpass").style.display = "block";
+            return false;
+          }    
+          
+          else{
+            cps.style.color = "white";
+            document.getElementById("alertpass").style.display = "none";
+          }     
+        }
+        function checkPassword(str)
+        {
+          var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+          return re.test(str);
+        }
+      
+        function checkForm()
+        {
+          if(form.username.value == "") {
+            alert("Error: Username cannot be blank!");
+            form.username.focus();
+            return false;
+          }
+          re = /^\w+$/;
+          if(!re.test(form.username.value)) {
+            alert("Error: Username must contain only letters, numbers and underscores!");
+            form.username.focus();
+            return false;
+          }
+          if(form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
+            if(!checkPassword(form.pwd1.value)) {
+              alert("The password you have entered is not valid!");
+              form.pwd1.focus();
+              return false;
+            }
+          } else {
+            alert("Error: Please check that you've entered and confirmed your password!");
+            form.pwd1.focus();
+            return false;
+          }
+          return true;
+        }
+        </script>
+    <!-- jquery
+		============================================ -->
+    <script src="js/vendor/jquery-1.11.3.min.js"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- wow JS
+		============================================ -->
+    <script src="js/wow.min.js"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="js/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+		============================================ -->
+    <script src="js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+		============================================ -->
+    <script src="js/metisMenu/metisMenu.min.js"></script>
+    <script src="js/metisMenu/metisMenu-active.js"></script>
+    <!-- tab JS
+		============================================ -->
+    <script src="js/tab.js"></script>
+    <!-- icheck JS
+		============================================ -->
+    <script src="js/icheck/icheck.min.js"></script>
+    <script src="js/icheck/icheck-active.js"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="js/plugins.js"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="js/main.js"></script>
+     <!-- jquery
+		============================================ -->
+    <script src="js/vendor/jquery-1.11.3.min.js"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- wow JS
+		============================================ -->
+    <script src="js/wow.min.js"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="js/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+		============================================ -->
+    <script src="js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+		============================================ -->
+    <script src="js/metisMenu/metisMenu.min.js"></script>
+    <script src="js/metisMenu/metisMenu-active.js"></script>
+    <!-- touchspin JS
+		============================================ -->
+    <script src="js/touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="js/touchspin/touchspin-active.js"></script>
+    <!-- colorpicker JS
+		============================================ -->
+    <script src="js/colorpicker/jquery.spectrum.min.js"></script>
+    <script src="js/colorpicker/color-picker-active.js"></script>
+    <!-- datapicker JS
+		============================================ -->
+    <script src="js/datapicker/bootstrap-datepicker.js"></script>
+    <script src="js/datapicker/datepicker-active.js"></script>
+    <!-- input-mask JS
+		============================================ -->
+    <script src="js/input-mask/jasny-bootstrap.min.js"></script>
+    <!-- chosen JS
+		============================================ -->
+    <script src="js/chosen/chosen.jquery.js"></script>
+    <script src="js/chosen/chosen-active.js"></script>
+    <!-- select2 JS
+		============================================ -->
+    <script src="js/select2/select2.full.min.js"></script>
+    <script src="js/select2/select2-active.js"></script>
+    <!-- ionRangeSlider JS
+		============================================ -->
+    <script src="js/ionRangeSlider/ion.rangeSlider.min.js"></script>
+    <script src="js/ionRangeSlider/ion.rangeSlider.active.js"></script>
+    <!-- rangle-slider JS
+		============================================ -->
+    <script src="js/rangle-slider/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="js/rangle-slider/jquery-ui-touch-punch.min.js"></script>
+    <script src="js/rangle-slider/rangle-active.js"></script>
+    <!-- knob JS
+		============================================ -->
+    <script src="js/knob/jquery.knob.js"></script>
+    <script src="js/knob/knob-active.js"></script>
+    <!-- tab JS
+		============================================ -->
+    <script src="js/tab.js"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="js/plugins.js"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="js/main.js"></script>
+    
+    
+
+</body>
+</html>
